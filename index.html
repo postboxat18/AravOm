@@ -3,59 +3,455 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aravinth Chenna Samy — Flutter Developer</title>
+<meta name="description" content="Aura Premium Dashboard — a private wealth overview in glass, indigo and champagne gold.">
+<title>Aura — Premium Dashboard</title>
 <style>
-  :root{--bg:#0f172a;--panel:#1e293b;--accent:#38bdf8;--text:#e2e8f0;--muted:#94a3b8;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-  .container{max-width:1000px;margin:0 auto;padding:40px 20px;}
-  header{text-align:center;padding:60px 0 30px;}
-  h1{font-size:2.8rem;color:#fff;letter-spacing:.5px;}
-  .role{color:var(--accent);font-size:1.3rem;margin-top:8px;font-weight:600;}
-  .tagline{color:var(--muted);margin-top:14px;max-width:600px;margin-left:auto;margin-right:auto;}
-  section{margin-top:50px;}
-  h2{font-size:1.6rem;color:#fff;border-left:4px solid var(--accent);padding-left:14px;margin-bottom:24px;}
-  .about p{color:var(--muted);max-width:720px;}
-  .skills{display:flex;flex-wrap:wrap;gap:10px;}
-  .skill{background:var(--panel);border:1px solid #334155;padding:8px 16px;border-radius:20px;font-size:.9rem;color:var(--text);}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
-  .card{background:var(--panel);border:1px solid #334155;border-radius:12px;padding:20px;}
-  .card h3{color:#fff;font-size:1.05rem;margin-bottom:8px;}
-  .card p{color:var(--muted);font-size:.9rem;}
-  .badge{display:inline-block;background:#0ea5e9;color:#fff;font-size:.7rem;padding:2px 10px;border-radius:10px;margin-top:10px;margin-right:6px;text-transform:uppercase;letter-spacing:.5px;}
-  .contact{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
-  .contact a{color:var(--accent);text-decoration:none;}
-  .contact a:hover{text-decoration:underline;}
-  footer{text-align:center;color:var(--muted);margin-top:60px;font-size:.85rem;border-top:1px solid #334155;padding-top:24px;}
+:root{ --serif: Georgia, 'Times New Roman', 'Palatino Linotype', serif; --sans: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; --ink:#f2eefc; --muted:rgba(226,220,248,.62); --faint:rgba(226,220,248,.38); --gold:#e6c88c; --violet:#9b86e6; --green:#9fe7b8; --red:#f0a0a8; --glass:rgba(255,255,255,.065); --line:rgba(255,255,255,.16); --hairline:rgba(255,255,255,.09); --radius:22px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--sans);font-weight:300;color:var(--ink);background:radial-gradient(1200px 800px at 85% -10%,rgba(140,110,230,.34),transparent 60%),radial-gradient(1000px 700px at -10% 30%,rgba(92,72,184,.42),transparent 55%),radial-gradient(900px 700px at 72% 112%,rgba(202,182,240,.20),transparent 60%),linear-gradient(155deg,#131026 0%,#1d1440 45%,#2a1c55 100%);background-attachment:fixed;min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;z-index:0;}
+.orb-1{width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle at 35% 35%,#5b47b8,transparent 68%);}
+.orb-2{width:44vw;height:44vw;right:-12vw;top:6vh;background:radial-gradient(circle at 40% 40%,#8f6fe0,transparent 66%);}
+.orb-3{width:48vw;height:48vw;left:16vw;bottom:-26vw;background:radial-gradient(circle at 45% 45%,#b9a6ee,transparent 65%);opacity:.32;}
+.page{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem) 3rem;}
+.topbar{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding:1.15rem 0;border-bottom:1px solid var(--hairline);}
+.brand{display:flex;align-items:center;gap:.7rem;}
+.brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#f0dcae,#c9a55e);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;color:#241a3d;font-weight:600;}
+.brand-name{font-family:var(--serif);font-size:1.25rem;letter-spacing:.04em;}
+.brand-sub{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-top:-2px;}
+.nav{display:flex;gap:1.6rem;margin-left:.5rem;}
+.nav a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.06em;padding:.35rem 0;}
+.nav a.active{color:var(--gold);}
+.top-meta{display:flex;align-items:center;gap:.7rem;margin-left:auto;flex-wrap:wrap;}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:.42rem .9rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--hairline);backdrop-filter:blur(8px);}
+.dot{width:7px;height:7px;border-radius:50%;background:#e0b86a;box-shadow:0 0 8px rgba(224,184,106,.8);}
+.chip-avatar{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.8rem;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border:1px solid rgba(255,255,255,.4);}
+.hero{padding:3.2rem 0 2.1rem;}
+.eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.6vw,3.3rem);letter-spacing:.01em;line-height:1.12;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.subtitle{margin-top:.9rem;max-width:58ch;color:var(--muted);font-size:.98rem;font-weight:300;}
+.hero-rule{display:flex;align-items:center;gap:.9rem;margin-top:1.6rem;color:var(--gold);font-size:.8rem;}
+.rule{height:1px;width:70px;background:linear-gradient(90deg,rgba(230,200,140,.7),transparent);}
+.ticker{overflow:hidden;border-radius:999px;margin:0 0 1.6rem;background:rgba(255,255,255,.045);border:1px solid var(--hairline);backdrop-filter:blur(10px);padding:.6rem 2rem;white-space:nowrap;color:var(--muted);font-size:.78rem;letter-spacing:.02em;}
+.ticker b{font-weight:500;color:var(--ink);}
+.up{color:var(--green);} .down{color:var(--red);}
+.card{position:relative;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 24px 50px rgba(10,8,30,.42);padding:1.5rem 1.6rem;}
+.card-portfolio{margin-bottom:1.4rem;}
+.kicker{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.3rem;}
+.card h2{font-family:var(--serif);font-weight:400;font-size:1.18rem;letter-spacing:.02em;margin:0;}
+.pf-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:2.2rem;align-items:center;}
+.pf-label{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.6rem;}
+.pf-value{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.4rem);letter-spacing:.01em;line-height:1.1;margin:.5rem 0 .8rem;}
+.pf-value sup{font-size:.45em;color:var(--gold);}
+.badge-green{font-size:.78rem;color:var(--green);padding:.3rem .75rem;border-radius:999px;background:rgba(143,227,176,.1);border:1px solid rgba(143,227,176,.3);}
+.goal{margin-top:1.4rem;max-width:420px;}
+.goal-row{display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.08em;color:var(--muted);margin-bottom:.45rem;}
+.goal-row b{color:var(--gold);}
+.goal-track{height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;}
+.goal-fill{height:100%;width:95%;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--gold));}
+.pf-side{border-left:1px solid var(--hairline);padding-left:2.2rem;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:.72rem 0;border-bottom:1px solid var(--hairline);}
+.stat-row .k{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.stat-row .v{font-family:var(--serif);font-size:1.05rem;}
+.pf-actions{display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap;}
+.btn{font-size:.8rem;letter-spacing:.06em;cursor:pointer;border-radius:999px;padding:.6rem 1.35rem;border:none;font-family:var(--sans);}
+.btn-gold{font-weight:600;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.22);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.w2{grid-column:span 2;}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem;}
+.chips{display:flex;gap:.4rem;}
+.chip{font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--muted);border:1px solid var(--hairline);background:rgba(255,255,255,.04);}
+.chip.active{color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border-color:transparent;font-weight:600;}
+.chart{width:100%;height:auto;display:block;margin-top:.4rem;}
+.perf-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--hairline);}
+.perf-stat .k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:block;}
+.perf-stat .v{font-family:var(--serif);font-size:1.05rem;}
+.perf-stat .v.gold{color:var(--gold);}
+.alloc-body{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;margin-top:1rem;}
+.donut-val{font-family:var(--serif);font-size:21px;fill:#f4efff;}
+.donut-lab{font-size:7.5px;letter-spacing:.24em;fill:rgba(226,220,248,.5);text-transform:uppercase;}
+.legend{flex:1;min-width:170px;}
+.legend-row{display:flex;align-items:center;gap:.65rem;padding:.6rem .5rem;}
+.swatch{width:9px;height:9px;border-radius:50%;}
+.sw-gold{background:var(--gold);} .sw-violet{background:var(--violet);} .sw-lav{background:#d9d0f5;}
+.legend-name{font-size:.82rem;}
+.legend-pct{margin-left:auto;font-size:.78rem;color:var(--muted);}
+.insight{display:grid;grid-template-columns:auto 1fr auto;column-gap:.8rem;row-gap:.15rem;align-items:center;padding:.85rem .6rem;border-left:2px solid transparent;}
+.ins-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(230,200,140,.35);padding:.2rem .5rem;border-radius:999px;justify-self:start;}
+.ins-title{font-family:var(--serif);font-size:.95rem;line-height:1.35;}
+.ins-arrow{color:var(--gold);}
+.badge-premium{display:inline-flex;align-items:center;gap:.5rem;font-size:.66rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#241a3d;padding:.42rem 1rem;border-radius:999px;background:linear-gradient(110deg,#caa25a 0%,#f4e3b4 42%,#caa25a 60%,#e8cd94 100%);box-shadow:0 6px 18px rgba(201,165,94,.35);}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:.4rem;}
+.switch-title{font-size:.85rem;}
+.switch-sub{font-size:.7rem;color:var(--faint);margin-top:.15rem;}
+.switch{position:relative;display:inline-block;width:48px;height:27px;flex:none;cursor:pointer;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);transition:background .35s;}
+.switch.on{background:linear-gradient(135deg,#ecd39d,#c9a55e);border-color:transparent;}
+.knob{position:absolute;top:2.5px;left:3px;width:20px;height:20px;border-radius:50%;background:#cfc7e8;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:left .35s;}
+.switch.on .knob{left:24px;background:#fff;}
+.profile-head{display:flex;align-items:center;gap:1.1rem;}
+.avatar{width:62px;height:62px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem;color:#f6ead0;background:radial-gradient(circle at 30% 25%,#6d57c8,#2c1f60 75%);border:1px solid rgba(230,200,140,.55);}
+.profile-name{font-family:var(--serif);font-size:1.15rem;}
+.profile-meta{font-size:.72rem;color:var(--faint);letter-spacing:.05em;margin-top:.2rem;}
+.profile-actions{display:flex;align-items:center;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:1.1rem;}
+.link-quiet{font-size:.76rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;cursor:pointer;}
+footer{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.7rem;color:var(--faint);letter-spacing:.06em;}
+footer .sig{font-style:italic;color:var(--muted);}
+@media (max-width:1020px){ .grid{grid-template-columns:repeat(2,1fr);} .nav{display:none;} .pf-grid{grid-template-columns:1fr;gap:1.4rem;} .pf-side{border-left:none;padding-left:0;border-top:1px solid var(--hairline);padding-top:1.2rem;} }
+@media (max-width:660px){ .grid{grid-template-columns:1fr;} .w2{grid-column:auto;} .hero{padding-top:2.2rem;} .top-meta{margin-left:0;} .card{padding:1.25rem 1.2rem;} }
 </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>Aravinth Chenna Samy</h1>
-    <div class="role">Flutter Developer</div>
-    <p class="tagline">Building fast, beautiful, cross-platform apps and open-source Flutter packages.</p>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<div class="page">
+  <div class="topbar"><div class="brand"><div class="brand-mark">A</div><div><div class="brand-name">Aura</div><span class="brand-sub">Premium</span></div></div>
+    <nav class="nav"><a href="#" class="active">Dashboard</a><a href="#">Assets</a><a href="#">Insights</a><a href="#">Account</a></nav>
+    <div class="top-meta"><span class="pill"><span class="dot"></span>All systems live</span><span class="chip-avatar">AM</span></div>
+  </div>
+  <header class="hero">
+    <div class="eyebrow">Curated for you</div>
+    <h1>Aura <em>Premium</em> Dashboard</h1>
+    <p class="subtitle">Your curated financial wellness portfolio — every asset, insight, and goal in one glass-clear view.</p>
+    <div class="hero-rule"><span class="rule"></span>Portfolio Health &middot;&middot;&middot; Refined returns</div>
   </header>
-  <section class="about"><h2>About</h2><p>I'm Aravinth, a passionate Flutter developer creating modern mobile and web experiences. I build production-grade apps, maintain open-source Flutter packages, and love exploring AI-powered applications and cloud infrastructure.</p></section>
-  <section><h2>Skills</h2><div class="skills"><span class="skill">Flutter</span><span class="skill">Dart</span><span class="skill">Swift</span><span class="skill">Android</span><span class="skill">iOS</span><span class="skill">Firebase</span><span class="skill">Google Cloud</span><span class="skill">Git &amp; GitHub</span><span class="skill">REST APIs</span><span class="skill">UI/UX</span></div></section>
-  <section><h2>Projects</h2><div class="grid">
-    <div class="card"><h3>AravOm</h3><p>AI-powered assistant built on modern LLM architectures.</p><span class="badge">AI</span></div>
-    <div class="card"><h3>RAGArch</h3><p>Retrieval-Augmented Generation framework for intelligent document Q&amp;A.</p><span class="badge">AI</span></div>
-    <div class="card"><h3>MCPServerModel</h3><p>Model Context Protocol server reference implementation.</p><span class="badge">Backend</span></div>
-    <div class="card"><h3>GoogleCloudBucket</h3><p>Cloud storage integration and management toolkit.</p><span class="badge">Cloud</span></div>
-    <div class="card"><h3>flutter_listfilter</h3><p>A highly customizable Flutter package for filtering and searching lists efficiently.</p><span class="badge">Package</span><span class="badge">UI</span></div>
-    <div class="card"><h3>flutter_material_calendar</h3><p>A beautiful Material Design calendar widget for Flutter applications.</p><span class="badge">Package</span><span class="badge">UI</span></div>
-    <div class="card"><h3>custom_scroll_date_range_picker</h3><p>A flexible date range picker with custom scroll behaviors and intuitive selection.</p><span class="badge">Package</span><span class="badge">UI</span></div>
-    <div class="card"><h3>material_calendar_event</h3><p>Event management extensions built on Material calendar widgets.</p><span class="badge">Package</span><span class="badge">UI</span></div>
-    <div class="card"><h3>flutterbootstrap5</h3><p>Bring Bootstrap 5-style responsive layout utilities to Flutter web.</p><span class="badge">Package</span></div>
-  </div></section>
-  <section><h2>Contact</h2><div class="contact">
-    <a href="https://github.com/postboxat18" target="_blank" rel="noopener">GitHub: github.com/postboxat18</a>
-    <a href="https://medium.com/@aravinthc18" target="_blank" rel="noopener">Medium: @aravinthc18</a>
-    <a href="mailto:postboxatagent18@gmail.com">Email: postboxatagent18@gmail.com</a>
-  </div></section>
-  <footer>&copy; <span id="yr"></span> Aravinth Chenna Samy. Built with Flutter-inspired design.</footer>
+  <div class="ticker"><b>Portfolio</b> +12.86% YTD &middot; <b>Equities</b> <span class="up">+4.12%</span> &middot; <b>Bonds</b> <span class="up">+2.3%</span> &middot; <b>Alternatives</b> <span class="down">-0.8%</span></div>
+  <div class="card card-portfolio">
+    <div class="pf-grid">
+      <div>
+        <div class="pf-label">Portfolio Value</div>
+        <div class="pf-value"><sup>$</sup>142,850.20</div>
+        <span class="badge-green">&#9650; +4.12% today</span>
+        <div class="goal"><div class="goal-row"><span>Annual goal</span><b>95%</b></div><div class="goal-track"><div class="goal-fill"></div></div></div>
+      </div>
+      <div class="pf-side">
+        <div class="stat-row"><span class="k">YTD Return</span><span class="v up">+12.86%</span></div>
+        <div class="stat-row"><span class="k">Liquidity</span><span class="v">$24,620</span></div>
+        <div class="pf-actions"><button class="btn btn-gold" type="button">Add Funds</button><button class="btn btn-ghost" type="button">Withdraw</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <section class="card w2">
+      <div class="card-head"><div><span class="kicker">Performance</span><h2>Overview — Last 6 Months</h2></div><div class="chips"><span class="chip">1M</span><span class="chip">3M</span><span class="chip active">6M</span><span class="chip">1Y</span></div></div>
+      <svg class="chart" viewBox="0 0 560 210" role="img" aria-label="Area chart of portfolio value rising from about $127,300 to $142,850">
+        <defs><linearGradient id="auAreaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88c" stop-opacity="0.32"/><stop offset="1" stop-color="#e6c88c" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20 L560,210 L0,210 Z" fill="url(#auAreaFill)"/>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20" fill="none" stroke="#e6c88c" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="0" cy="160" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="90" cy="140" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="170" cy="120" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="250" cy="95" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="340" cy="70" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="430" cy="50" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aura Premium Dashboard — a private wealth overview in glass, indigo and champagne gold.">
+<title>Aura — Premium Dashboard</title>
+<style>
+:root{ --serif: Georgia, 'Times New Roman', 'Palatino Linotype', serif; --sans: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; --ink:#f2eefc; --muted:rgba(226,220,248,.62); --faint:rgba(226,220,248,.38); --gold:#e6c88c; --violet:#9b86e6; --green:#9fe7b8; --red:#f0a0a8; --glass:rgba(255,255,255,.065); --line:rgba(255,255,255,.16); --hairline:rgba(255,255,255,.09); --radius:22px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--sans);font-weight:300;color:var(--ink);background:radial-gradient(1200px 800px at 85% -10%,rgba(140,110,230,.34),transparent 60%),radial-gradient(1000px 700px at -10% 30%,rgba(92,72,184,.42),transparent 55%),radial-gradient(900px 700px at 72% 112%,rgba(202,182,240,.20),transparent 60%),linear-gradient(155deg,#131026 0%,#1d1440 45%,#2a1c55 100%);background-attachment:fixed;min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;z-index:0;}
+.orb-1{width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle at 35% 35%,#5b47b8,transparent 68%);}
+.orb-2{width:44vw;height:44vw;right:-12vw;top:6vh;background:radial-gradient(circle at 40% 40%,#8f6fe0,transparent 66%);}
+.orb-3{width:48vw;height:48vw;left:16vw;bottom:-26vw;background:radial-gradient(circle at 45% 45%,#b9a6ee,transparent 65%);opacity:.32;}
+.page{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem) 3rem;}
+.topbar{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding:1.15rem 0;border-bottom:1px solid var(--hairline);}
+.brand{display:flex;align-items:center;gap:.7rem;}
+.brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#f0dcae,#c9a55e);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;color:#241a3d;font-weight:600;}
+.brand-name{font-family:var(--serif);font-size:1.25rem;letter-spacing:.04em;}
+.brand-sub{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-top:-2px;}
+.nav{display:flex;gap:1.6rem;margin-left:.5rem;}
+.nav a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.06em;padding:.35rem 0;}
+.nav a.active{color:var(--gold);}
+.top-meta{display:flex;align-items:center;gap:.7rem;margin-left:auto;flex-wrap:wrap;}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:.42rem .9rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--hairline);backdrop-filter:blur(8px);}
+.dot{width:7px;height:7px;border-radius:50%;background:#e0b86a;box-shadow:0 0 8px rgba(224,184,106,.8);}
+.chip-avatar{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.8rem;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border:1px solid rgba(255,255,255,.4);}
+.hero{padding:3.2rem 0 2.1rem;}
+.eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.6vw,3.3rem);letter-spacing:.01em;line-height:1.12;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.subtitle{margin-top:.9rem;max-width:58ch;color:var(--muted);font-size:.98rem;font-weight:300;}
+.hero-rule{display:flex;align-items:center;gap:.9rem;margin-top:1.6rem;color:var(--gold);font-size:.8rem;}
+.rule{height:1px;width:70px;background:linear-gradient(90deg,rgba(230,200,140,.7),transparent);}
+.ticker{overflow:hidden;border-radius:999px;margin:0 0 1.6rem;background:rgba(255,255,255,.045);border:1px solid var(--hairline);backdrop-filter:blur(10px);padding:.6rem 2rem;white-space:nowrap;color:var(--muted);font-size:.78rem;letter-spacing:.02em;}
+.ticker b{font-weight:500;color:var(--ink);}
+.up{color:var(--green);} .down{color:var(--red);}
+.card{position:relative;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 24px 50px rgba(10,8,30,.42);padding:1.5rem 1.6rem;}
+.card-portfolio{margin-bottom:1.4rem;}
+.kicker{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.3rem;}
+.card h2{font-family:var(--serif);font-weight:400;font-size:1.18rem;letter-spacing:.02em;margin:0;}
+.pf-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:2.2rem;align-items:center;}
+.pf-label{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.6rem;}
+.pf-value{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.4rem);letter-spacing:.01em;line-height:1.1;margin:.5rem 0 .8rem;}
+.pf-value sup{font-size:.45em;color:var(--gold);}
+.badge-green{font-size:.78rem;color:var(--green);padding:.3rem .75rem;border-radius:999px;background:rgba(143,227,176,.1);border:1px solid rgba(143,227,176,.3);}
+.goal{margin-top:1.4rem;max-width:420px;}
+.goal-row{display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.08em;color:var(--muted);margin-bottom:.45rem;}
+.goal-row b{color:var(--gold);}
+.goal-track{height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;}
+.goal-fill{height:100%;width:95%;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--gold));}
+.pf-side{border-left:1px solid var(--hairline);padding-left:2.2rem;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:.72rem 0;border-bottom:1px solid var(--hairline);}
+.stat-row .k{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.stat-row .v{font-family:var(--serif);font-size:1.05rem;}
+.pf-actions{display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap;}
+.btn{font-size:.8rem;letter-spacing:.06em;cursor:pointer;border-radius:999px;padding:.6rem 1.35rem;border:none;font-family:var(--sans);}
+.btn-gold{font-weight:600;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.22);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.w2{grid-column:span 2;}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem;}
+.chips{display:flex;gap:.4rem;}
+.chip{font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--muted);border:1px solid var(--hairline);background:rgba(255,255,255,.04);}
+.chip.active{color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border-color:transparent;font-weight:600;}
+.chart{width:100%;height:auto;display:block;margin-top:.4rem;}
+.perf-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--hairline);}
+.perf-stat .k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:block;}
+.perf-stat .v{font-family:var(--serif);font-size:1.05rem;}
+.perf-stat .v.gold{color:var(--gold);}
+.alloc-body{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;margin-top:1rem;}
+.donut-val{font-family:var(--serif);font-size:21px;fill:#f4efff;}
+.donut-lab{font-size:7.5px;letter-spacing:.24em;fill:rgba(226,220,248,.5);text-transform:uppercase;}
+.legend{flex:1;min-width:170px;}
+.legend-row{display:flex;align-items:center;gap:.65rem;padding:.6rem .5rem;}
+.swatch{width:9px;height:9px;border-radius:50%;}
+.sw-gold{background:var(--gold);} .sw-violet{background:var(--violet);} .sw-lav{background:#d9d0f5;}
+.legend-name{font-size:.82rem;}
+.legend-pct{margin-left:auto;font-size:.78rem;color:var(--muted);}
+.insight{display:grid;grid-template-columns:auto 1fr auto;column-gap:.8rem;row-gap:.15rem;align-items:center;padding:.85rem .6rem;border-left:2px solid transparent;}
+.ins-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(230,200,140,.35);padding:.2rem .5rem;border-radius:999px;justify-self:start;}
+.ins-title{font-family:var(--serif);font-size:.95rem;line-height:1.35;}
+.ins-arrow{color:var(--gold);}
+.badge-premium{display:inline-flex;align-items:center;gap:.5rem;font-size:.66rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#241a3d;padding:.42rem 1rem;border-radius:999px;background:linear-gradient(110deg,#caa25a 0%,#f4e3b4 42%,#caa25a 60%,#e8cd94 100%);box-shadow:0 6px 18px rgba(201,165,94,.35);}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:.4rem;}
+.switch-title{font-size:.85rem;}
+.switch-sub{font-size:.7rem;color:var(--faint);margin-top:.15rem;}
+.switch{position:relative;display:inline-block;width:48px;height:27px;flex:none;cursor:pointer;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);transition:background .35s;}
+.switch.on{background:linear-gradient(135deg,#ecd39d,#c9a55e);border-color:transparent;}
+.knob{position:absolute;top:2.5px;left:3px;width:20px;height:20px;border-radius:50%;background:#cfc7e8;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:left .35s;}
+.switch.on .knob{left:24px;background:#fff;}
+.profile-head{display:flex;align-items:center;gap:1.1rem;}
+.avatar{width:62px;height:62px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem;color:#f6ead0;background:radial-gradient(circle at 30% 25%,#6d57c8,#2c1f60 75%);border:1px solid rgba(230,200,140,.55);}
+.profile-name{font-family:var(--serif);font-size:1.15rem;}
+.profile-meta{font-size:.72rem;color:var(--faint);letter-spacing:.05em;margin-top:.2rem;}
+.profile-actions{display:flex;align-items:center;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:1.1rem;}
+.link-quiet{font-size:.76rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;cursor:pointer;}
+footer{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.7rem;color:var(--faint);letter-spacing:.06em;}
+footer .sig{font-style:italic;color:var(--muted);}
+@media (max-width:1020px){ .grid{grid-template-columns:repeat(2,1fr);} .nav{display:none;} .pf-grid{grid-template-columns:1fr;gap:1.4rem;} .pf-side{border-left:none;padding-left:0;border-top:1px solid var(--hairline);padding-top:1.2rem;} }
+@media (max-width:660px){ .grid{grid-template-columns:1fr;} .w2{grid-column:auto;} .hero{padding-top:2.2rem;} .top-meta{margin-left:0;} .card{padding:1.25rem 1.2rem;} }
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<div class="page">
+  <div class="topbar"><div class="brand"><div class="brand-mark">A</div><div><div class="brand-name">Aura</div><span class="brand-sub">Premium</span></div></div>
+    <nav class="nav"><a href="#" class="active">Dashboard</a><a href="#">Assets</a><a href="#">Insights</a><a href="#">Account</a></nav>
+    <div class="top-meta"><span class="pill"><span class="dot"></span>All systems live</span><span class="chip-avatar">AM</span></div>
+  </div>
+  <header class="hero">
+    <div class="eyebrow">Curated for you</div>
+    <h1>Aura <em>Premium</em> Dashboard</h1>
+    <p class="subtitle">Your curated financial wellness portfolio — every asset, insight, and goal in one glass-clear view.</p>
+    <div class="hero-rule"><span class="rule"></span>Portfolio Health &middot;&middot;&middot; Refined returns</div>
+  </header>
+  <div class="ticker"><b>Portfolio</b> +12.86% YTD &middot; <b>Equities</b> <span class="up">+4.12%</span> &middot; <b>Bonds</b> <span class="up">+2.3%</span> &middot; <b>Alternatives</b> <span class="down">-0.8%</span></div>
+  <div class="card card-portfolio">
+    <div class="pf-grid">
+      <div>
+        <div class="pf-label">Portfolio Value</div>
+        <div class="pf-value"><sup>$</sup>142,850.20</div>
+        <span class="badge-green">&#9650; +4.12% today</span>
+        <div class="goal"><div class="goal-row"><span>Annual goal</span><b>95%</b></div><div class="goal-track"><div class="goal-fill"></div></div></div>
+      </div>
+      <div class="pf-side">
+        <div class="stat-row"><span class="k">YTD Return</span><span class="v up">+12.86%</span></div>
+        <div class="stat-row"><span class="k">Liquidity</span><span class="v">$24,620</span></div>
+        <div class="pf-actions"><button class="btn btn-gold" type="button">Add Funds</button><button class="btn btn-ghost" type="button">Withdraw</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <section class="card w2">
+      <div class="card-head"><div><span class="kicker">Performance</span><h2>Overview — Last 6 Months</h2></div><div class="chips"><span class="chip">1M</span><span class="chip">3M</span><span class="chip active">6M</span><span class="chip">1Y</span></div></div>
+      <svg class="chart" viewBox="0 0 560 210" role="img" aria-label="Area chart of portfolio value rising from about $127,300 to $142,850">
+        <defs><linearGradient id="auAreaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88c" stop-opacity="0.32"/><stop offset="1" stop-color="#e6c88c" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20 L560,210 L0,210 Z" fill="url(#auAreaFill)"/>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20" fill="none" stroke="#e6c88c" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="0" cy="160" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="90" cy="140" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="170" cy="120" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="250" cy="95" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="340" cy="70" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="430" cy="50" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/>
+      </svg>
+      <div class="perf-stats"><div class="perf-stat"><span class="k">Best Month</span><span class="v gold">August +5.2%</span></div><div class="perf-stat"><span class="k">Volatility</span><span class="v">6.8</span></div><div class="perf-stat"><span class="k">Sharpe</span><span class="v">1.9</span></div></div>
+    </section>
+    <section class="card">
+      <span class="kicker">Allocation</span><h2>Investment Mix</h2>
+      <div class="alloc-body">
+        <svg viewBox="0 0 158 158" width="158" height="158" role="img" aria-label="Donut chart: Equities 45%, Bonds 30%, Alternatives 25%">
+          <circle cx="79" cy="79" r="54" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="13"/>
+          <circle cx="79" cy="79" r="54" fill="none" stroke="#e6c88c" stroke-width="13" stroke-dasharray="149.68 189.612" stroke-dashoffset="25" stroke-linecap="round"/>
+          <circle cx="79" cy="79" r="54" fill="none" stroke="#9b86e6" stroke-width="13" stroke-dasharray="98.79 240.502" stroke-dashoffset="-147.68" stroke-linecap="round"/>
+          <circle cx="79" cy="79" r="54" fill="none" stroke="#d9d0f5" stroke-width="13" stroke-dasharray="81.82 257.472" stroke-dashoffset="-246.47" stroke-linecap="round"/>
+          <text x="79" y="76" text-anchor="middle" class="donut-val">100%</text><text x="79" y="96" text-anchor="middle" class="donut-lab">DIVERSIFIED</text>
+        </svg>
+        <div class="legend"><div class="legend-row"><span class="swatch sw-gold"></span><span class="legend-name">Equities</span><span class="legend-pct">45%</span></div><div class="legend-row"><span class="swatch sw-violet"></span><span class="legend-name">Bonds</span><span class="legend-pct">30%</span></div><div class="legend-row"><span class="swatch sw-lav"></span><span class="legend-name">Alternatives</span><span class="legend-pct">25%</span></div></div>
+      </div>
+    </section>
+    <section class="card">
+      <span class="kicker">Market</span><h2>Insights</h2>
+      <div class="insight"><span class="ins-tag">Global Markets</span><span class="ins-title">Equities extend gains as inflation cools</span><span class="ins-arrow">&rarr;</span></div>
+      <div class="insight"><span class="ins-tag">AI Trends</span><span class="ins-title">Semiconductors lead the rally into Q3</span><span class="ins-arrow">&rarr;</span></div>
+      <div class="insight"><span class="ins-tag">Wealth Mgmt.</span><span class="ins-title">Private credit keeps luring capital</span><span class="ins-arrow">&rarr;</span></div>
+    </section>
+    <section class="card">
+      <div class="card-head"><div><span class="kicker">Subscription</span><h2>Plan Access</h2></div><span class="badge-premium">Premium</span></div>
+      <div class="switch-row"><div><div class="switch-title">Auto-Renew</div><div class="switch-sub">Renews <span id="renewState">on</span> — manage anytime</div></div><div class="switch on" id="switch" role="switch" aria-checked="true" aria-label="Auto-Renew toggle"><span class="knob"></span></div></div>
+    </section>
+    <section class="card">
+      <div class="profile-head"><div class="avatar">AM</div><div><div class="profile-name">Alexander Mercer</div><div class="profile-meta">Wealth Member</div></div></div>
+      <div class="profile-actions"><button class="btn btn-gold" type="button">Edit</button><a href="#" class="link-quiet">View statements &rarr;</a></div>
+    </section>
+  </div>
+  <footer><span>&copy; <span id="yr"></span> Aura Capital Partners &middot; Demonstration interface</span><span class="sig">Wealth, composed with quiet precision.</span><span>Market data delayed at least 15 minutes</span></footer>
 </div>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();var sw=document.getElementById('switch'),st=document.getElementById('renewState');sw.addEventListener('click',function(){var on=sw.classList.toggle('on');sw.setAttribute('aria-checked',on);st.textContent=on?'on':'off';});</script>
 </body>
-</html>
+                </html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aura Premium Dashboard — a private wealth overview in glass, indigo and champagne gold.">
+<title>Aura — Premium Dashboard</title>
+<style>
+:root{ --serif: Georgia, 'Times New Roman', 'Palatino Linotype', serif; --sans: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; --ink:#f2eefc; --muted:rgba(226,220,248,.62); --faint:rgba(226,220,248,.38); --gold:#e6c88c; --violet:#9b86e6; --green:#9fe7b8; --red:#f0a0a8; --glass:rgba(255,255,255,.065); --line:rgba(255,255,255,.16); --hairline:rgba(255,255,255,.09); --radius:22px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--sans);font-weight:300;color:var(--ink);background:radial-gradient(1200px 800px at 85% -10%,rgba(140,110,230,.34),transparent 60%),radial-gradient(1000px 700px at -10% 30%,rgba(92,72,184,.42),transparent 55%),radial-gradient(900px 700px at 72% 112%,rgba(202,182,240,.20),transparent 60%),linear-gradient(155deg,#131026 0%,#1d1440 45%,#2a1c55 100%);background-attachment:fixed;min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;z-index:0;}
+.orb-1{width:52vw;height:52vw;left:-14vw;top:-16vw;background:radial-gradient(circle at 35% 35%,#5b47b8,transparent 68%);}
+.orb-2{width:44vw;height:44vw;right:-12vw;top:6vh;background:radial-gradient(circle at 40% 40%,#8f6fe0,transparent 66%);}
+.orb-3{width:48vw;height:48vw;left:16vw;bottom:-26vw;background:radial-gradient(circle at 45% 45%,#b9a6ee,transparent 65%);opacity:.32;}
+.page{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem) 3rem;}
+.topbar{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding:1.15rem 0;border-bottom:1px solid var(--hairline);}
+.brand{display:flex;align-items:center;gap:.7rem;}
+.brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#f0dcae,#c9a55e);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;color:#241a3d;font-weight:600;}
+.brand-name{font-family:var(--serif);font-size:1.25rem;letter-spacing:.04em;}
+.brand-sub{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-top:-2px;}
+.nav{display:flex;gap:1.6rem;margin-left:.5rem;}
+.nav a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.06em;padding:.35rem 0;}
+.nav a.active{color:var(--gold);}
+.top-meta{display:flex;align-items:center;gap:.7rem;margin-left:auto;flex-wrap:wrap;}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:.42rem .9rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--hairline);backdrop-filter:blur(8px);}
+.dot{width:7px;height:7px;border-radius:50%;background:#e0b86a;box-shadow:0 0 8px rgba(224,184,106,.8);}
+.chip-avatar{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.8rem;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border:1px solid rgba(255,255,255,.4);}
+.hero{padding:3.2rem 0 2.1rem;}
+.eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,4.6vw,3.3rem);letter-spacing:.01em;line-height:1.12;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.subtitle{margin-top:.9rem;max-width:58ch;color:var(--muted);font-size:.98rem;font-weight:300;}
+.hero-rule{display:flex;align-items:center;gap:.9rem;margin-top:1.6rem;color:var(--gold);font-size:.8rem;}
+.rule{height:1px;width:70px;background:linear-gradient(90deg,rgba(230,200,140,.7),transparent);}
+.ticker{overflow:hidden;border-radius:999px;margin:0 0 1.6rem;background:rgba(255,255,255,.045);border:1px solid var(--hairline);backdrop-filter:blur(10px);padding:.6rem 2rem;white-space:nowrap;color:var(--muted);font-size:.78rem;letter-spacing:.02em;}
+.ticker b{font-weight:500;color:var(--ink);}
+.up{color:var(--green);} .down{color:var(--red);}
+.card{position:relative;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 24px 50px rgba(10,8,30,.42);padding:1.5rem 1.6rem;}
+.card-portfolio{margin-bottom:1.4rem;}
+.kicker{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.3rem;}
+.card h2{font-family:var(--serif);font-weight:400;font-size:1.18rem;letter-spacing:.02em;margin:0;}
+.pf-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:2.2rem;align-items:center;}
+.pf-label{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.6rem;}
+.pf-value{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.4rem);letter-spacing:.01em;line-height:1.1;margin:.5rem 0 .8rem;}
+.pf-value sup{font-size:.45em;color:var(--gold);}
+.badge-green{font-size:.78rem;color:var(--green);padding:.3rem .75rem;border-radius:999px;background:rgba(143,227,176,.1);border:1px solid rgba(143,227,176,.3);}
+.goal{margin-top:1.4rem;max-width:420px;}
+.goal-row{display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.08em;color:var(--muted);margin-bottom:.45rem;}
+.goal-row b{color:var(--gold);}
+.goal-track{height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;}
+.goal-fill{height:100%;width:95%;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--gold));}
+.pf-side{border-left:1px solid var(--hairline);padding-left:2.2rem;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:.72rem 0;border-bottom:1px solid var(--hairline);}
+.stat-row .k{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.stat-row .v{font-family:var(--serif);font-size:1.05rem;}
+.pf-actions{display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap;}
+.btn{font-size:.8rem;letter-spacing:.06em;cursor:pointer;border-radius:999px;padding:.6rem 1.35rem;border:none;font-family:var(--sans);}
+.btn-gold{font-weight:600;color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.22);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.w2{grid-column:span 2;}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem;}
+.chips{display:flex;gap:.4rem;}
+.chip{font-size:.68rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--muted);border:1px solid var(--hairline);background:rgba(255,255,255,.04);}
+.chip.active{color:#241a3d;background:linear-gradient(135deg,#f0dcae,#cda45f);border-color:transparent;font-weight:600;}
+.chart{width:100%;height:auto;display:block;margin-top:.4rem;}
+.perf-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--hairline);}
+.perf-stat .k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:block;}
+.perf-stat .v{font-family:var(--serif);font-size:1.05rem;}
+.perf-stat .v.gold{color:var(--gold);}
+.alloc-body{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;margin-top:1rem;}
+.donut-val{font-family:var(--serif);font-size:21px;fill:#f4efff;}
+.donut-lab{font-size:7.5px;letter-spacing:.24em;fill:rgba(226,220,248,.5);text-transform:uppercase;}
+.legend{flex:1;min-width:170px;}
+.legend-row{display:flex;align-items:center;gap:.65rem;padding:.6rem .5rem;}
+.swatch{width:9px;height:9px;border-radius:50%;}
+.sw-gold{background:var(--gold);} .sw-violet{background:var(--violet);} .sw-lav{background:#d9d0f5;}
+.legend-name{font-size:.82rem;}
+.legend-pct{margin-left:auto;font-size:.78rem;color:var(--muted);}
+.insight{display:grid;grid-template-columns:auto 1fr auto;column-gap:.8rem;row-gap:.15rem;align-items:center;padding:.85rem .6rem;border-left:2px solid transparent;}
+.ins-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(230,200,140,.35);padding:.2rem .5rem;border-radius:999px;justify-self:start;}
+.ins-title{font-family:var(--serif);font-size:.95rem;line-height:1.35;}
+.ins-arrow{color:var(--gold);}
+.badge-premium{display:inline-flex;align-items:center;gap:.5rem;font-size:.66rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#241a3d;padding:.42rem 1rem;border-radius:999px;background:linear-gradient(110deg,#caa25a 0%,#f4e3b4 42%,#caa25a 60%,#e8cd94 100%);box-shadow:0 6px 18px rgba(201,165,94,.35);}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:.4rem;}
+.switch-title{font-size:.85rem;}
+.switch-sub{font-size:.7rem;color:var(--faint);margin-top:.15rem;}
+.switch{position:relative;display:inline-block;width:48px;height:27px;flex:none;cursor:pointer;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);transition:background .35s;}
+.switch.on{background:linear-gradient(135deg,#ecd39d,#c9a55e);border-color:transparent;}
+.knob{position:absolute;top:2.5px;left:3px;width:20px;height:20px;border-radius:50%;background:#cfc7e8;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:left .35s;}
+.switch.on .knob{left:24px;background:#fff;}
+.profile-head{display:flex;align-items:center;gap:1.1rem;}
+.avatar{width:62px;height:62px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem;color:#f6ead0;background:radial-gradient(circle at 30% 25%,#6d57c8,#2c1f60 75%);border:1px solid rgba(230,200,140,.55);}
+.profile-name{font-family:var(--serif);font-size:1.15rem;}
+.profile-meta{font-size:.72rem;color:var(--faint);letter-spacing:.05em;margin-top:.2rem;}
+.profile-actions{display:flex;align-items:center;gap:1rem;border-top:1px solid var(--hairline);padding-top:1.1rem;margin-top:1.1rem;}
+.link-quiet{font-size:.76rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;cursor:pointer;}
+footer{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.7rem;color:var(--faint);letter-spacing:.06em;}
+footer .sig{font-style:italic;color:var(--muted);}
+@media (max-width:1020px){ .grid{grid-template-columns:repeat(2,1fr);} .nav{display:none;} .pf-grid{grid-template-columns:1fr;gap:1.4rem;} .pf-side{border-left:none;padding-left:0;border-top:1px solid var(--hairline);padding-top:1.2rem;} }
+@media (max-width:660px){ .grid{grid-template-columns:1fr;} .w2{grid-column:auto;} .hero{padding-top:2.2rem;} .top-meta{margin-left:0;} .card{padding:1.25rem 1.2rem;} }
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<div class="page">
+  <div class="topbar"><div class="brand"><div class="brand-mark">A</div><div><div class="brand-name">Aura</div><span class="brand-sub">Premium</span></div></div>
+    <nav class="nav"><a href="#" class="active">Dashboard</a><a href="#">Assets</a><a href="#">Insights</a><a href="#">Account</a></nav>
+    <div class="top-meta"><span class="pill"><span class="dot"></span>All systems live</span><span class="chip-avatar">AM</span></div>
+  </div>
+  <header class="hero">
+    <div class="eyebrow">Curated for you</div>
+    <h1>Aura <em>Premium</em> Dashboard</h1>
+    <p class="subtitle">Your curated financial wellness portfolio — every asset, insight, and goal in one glass-clear view.</p>
+    <div class="hero-rule"><span class="rule"></span>Portfolio Health &middot;&middot;&middot; Refined returns</div>
+  </header>
+  <div class="ticker"><b>Portfolio</b> +12.86% YTD &middot; <b>Equities</b> <span class="up">+4.12%</span> &middot; <b>Bonds</b> <span class="up">+2.3%</span> &middot; <b>Alternatives</b> <span class="down">-0.8%</span></div>
+  <div class="card card-portfolio">
+    <div class="pf-grid">
+      <div>
+        <div class="pf-label">Portfolio Value</div>
+        <div class="pf-value"><sup>$</sup>142,850.20</div>
+        <span class="badge-green">&#9650; +4.12% today</span>
+        <div class="goal"><div class="goal-row"><span>Annual goal</span><b>95%</b></div><div class="goal-track"><div class="goal-fill"></div></div></div>
+      </div>
+      <div class="pf-side">
+        <div class="stat-row"><span class="k">YTD Return</span><span class="v up">+12.86%</span></div>
+        <div class="stat-row"><span class="k">Liquidity</span><span class="v">$24,620</span></div>
+        <div class="pf-actions"><button class="btn btn-gold" type="button">Add Funds</button><button class="btn btn-ghost" type="button">Withdraw</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <section class="card w2">
+      <div class="card-head"><div><span class="kicker">Performance</span><h2>Overview — Last 6 Months</h2></div><div class="chips"><span class="chip">1M</span><span class="chip">3M</span><span class="chip active">6M</span><span class="chip">1Y</span></div></div>
+      <svg class="chart" viewBox="0 0 560 210" role="img" aria-label="Area chart of portfolio value rising from about $127,300 to $142,850">
+        <defs><linearGradient id="auAreaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88c" stop-opacity="0.32"/><stop offset="1" stop-color="#e6c88c" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20 L560,210 L0,210 Z" fill="url(#auAreaFill)"/>
+        <path d="M0,160 L90,140 L170,120 L250,95 L340,70 L430,50 L560,20" fill="none" stroke="#e6c88c" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="0" cy="160" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="90" cy="140" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="170" cy="120" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="250" cy="95" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="340" cy="70" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/><circle cx="430" cy="50" r="4" fill="#171233" stroke="#e6c88c" stroke-width="1.8"/>
