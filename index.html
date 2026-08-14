@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aravinth C — Flutter Developer</title>
+<style>
+  :root{
+    --bg:#07090f; --panel:#0d1117; --card:#111827; --line:#1f2937;
+    --accent:#38bdf8; --accent2:#a78bfa; --text:#e5e7eb; --muted:#9ca3af;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  /* HERO */
+  .hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    background:radial-gradient(1200px 600px at 70% -10%,rgba(56,189,248,.16),transparent 60%),
+               radial-gradient(900px 500px at 20% 110%,rgba(167,139,250,.14),transparent 55%),var(--bg);
+    padding:40px 24px}
+  .hero h1{font-size:clamp(2.6rem,8vw,5.2rem);letter-spacing:.06em;text-transform:uppercase;font-weight:800;
+    line-height:1.05;background:linear-gradient(90deg,#e2e8f0,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{color:var(--muted);font-size:1.15rem;margin-top:14px;max-width:560px}
+  .hero .cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;border:1px solid var(--line);padding:12px 22px;border-radius:10px;color:var(--text);
+    background:var(--panel);transition:.2s;font-weight:600}
+  .btn.solid{background:linear-gradient(90deg,#0ea5e9,#8b5cf6);border-color:transparent;color:#fff}
+  .btn:hover{transform:translateY(-2px);text-decoration:none}
+  .hero .roles{color:var(--muted);margin-top:18px;font-size:.95rem;letter-spacing:.05em}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .badge{display:inline-block;animation:float 4s ease-in-out infinite}
+  /* SECTIONS */
+  section{padding:64px 0}
+  section h2{font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:10px}
+  .sect-desc{color:var(--muted);margin-bottom:30px;max-width:640px}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);border:0;margin:0}
+  /* ARTICLE CARD */
+  .article-card{display:block;background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(167,139,250,.1)),var(--card);
+    border:1px solid var(--line);border-radius:16px;padding:26px 28px;transition:.25s;position:relative;overflow:hidden}
+  .article-card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0ea5e9,#8b5cf6);opacity:.05}
+  .article-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 40px -18px rgba(56,189,248,.5)}
+  .article-card .tag{color:var(--accent2);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+  .article-card h3{margin:8px 0 10px;font-size:1.35rem;color:#fff}
+  .article-card p{color:var(--muted);margin-bottom:14px}
+  .article-card .read{font-weight:700;color:var(--accent)}
+  /* PACKAGE GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;transition:.2s}
+  .pkg:hover{transform:translateY(-3px);border-color:var(--accent);background:#151d2b}
+  .pkg .pname{font-weight:700;font-size:1.1rem;color:#fff;word-break:break-word}
+  .pkg .pname code{color:var(--accent);font-size:.85rem}
+  .pkg p{color:var(--muted);font-size:.95rem;flex:1}
+  .pkg .btn{border-radius:8px;padding:8px 14px;font-size:.9rem;border-color:var(--accent);color:var(--accent);text-align:center}
+  .pkg .btn:hover{background:var(--accent);color:#000}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){.hero h1{font-size:2.6rem}}
+</style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <span class="badge" style="font-size:.8rem;color:var(--accent);letter-spacing:.2em;font-weight:700">FLUTTER DEVELOPER</span>
+    <h1>Hi, I'm Aravinth&nbsp;C</h1>
+    <p class="sub">I build cross-platform Flutter apps and open-source Dart packages — and I write about taking MCP servers to the next level.</p>
+    <div class="cta-row">
+      <a class="btn solid" href="#article">Latest Article</a>
+      <a class="btn" href="#packages">My Packages</a>
+    </div>
+    <p class="roles">Flutter &nbsp;·&nbsp; Dart &nbsp;·&nbsp; MCP &nbsp;·&nbsp; Open Source</p>
+  </header>
+  <hr class="rule">
+
+  <!-- LATEST ARTICLE -->
+  <section id="article">
+    <div class="wrap">
+      <h2>Latest Article</h2>
+      <p class="sect-desc">My most recent story on Medium.</p>
+      <a class="article-card" href="https://medium.com/@aravinthc18/deploying-your-mcp-server-on-render-and-connecting-it-to-claude-ai-16b8ab262ce7" target="_blank" rel="noopener">
+        <span class="tag">Medium Story</span>
+        <h3>Deploying Your MCP Server on Render and Connecting It to Claude AI</h3>
+        <p>A complete walkthrough of deploying an MCP server on Render and connecting it to Claude AI — taking your MCP server to the next level.</p>
+        <span class="read">Read on Medium →</span>
+      </a>
+    </div>
+  </section>
+  <hr class="rule">
+
+  <!-- PACKAGES -->
+  <section id="packages">
+    <div class="wrap">
+      <h2>My Flutter / Dart Packages</h2>
+      <p class="sect-desc">Open-source packages I've published on pub.dev.</p>
+      <div class="grid">
+        <div class="pkg"><span class="pname"><code>flutter_listfilter</code></span>
+          <p>Make filtering lists a breeze with filter chips based on a user model list.</p>
+          <a class="btn" href="https://pub.dev/packages/flutter_listfilter" target="_blank" rel="noopener">View Package</a></div>
+        <div class="pkg"><span class="pname"><code>custom_scroll_date_range_picker</code></span>
+          <p>Pick from/to dates in a convenient scrollable interface.</p>
+          <a class="btn" href="https://pub.dev/packages/custom_scroll_date_range_picker" target="_blank" rel="noopener">View Package</a></div>
+        <div class="pkg"><span class="pname"><code>flutterbootstrap5latest</code></span>
+          <p>Support the creation of responsive web applications with Flutter.</p>
+          <a class="btn" href="https://pub.dev/packages/flutterbootstrap5latest" target="_blank" rel="noopener">View Package</a></div>
+        <div class="pkg"><span class="pname"><code>flutter_material_calendar</code></span>
+          <p>Keep track of tasks and deadlines in an organized, functional calendar.</p>
+          <a class="btn" href="https://pub.dev/packages/flutter_material_calendar" target="_blank" rel="noopener">View Package</a></div>
+        <div class="pkg"><span class="pname"><code>flutter_longpressdrag_fluctuation</code></span>
+          <p>Flutter Long Press Drag Fluctuation.</p>
+          <a class="btn" href="https://pub.dev/packages/flutter_longpressdrag_fluctuation" target="_blank" rel="noopener">View Package</a></div>
+      </div>
+    </div>
+  </section>
+  <hr class="rule">
+
+  <footer>
+    <div class="wrap">
+      <p>© <span id="yr"></span> Aravinth C · Built with Flutter &amp; a bit of web magic ✨</p>
+      <p style="margin-top:6px"><a href="https://medium.com/@aravinthc18" target="_blank" rel="noopener">Medium</a> &nbsp;·&nbsp; <a href="https://pub.dev/publishers/postboxat18.blogspot.com/packages" target="_blank" rel="noopener">pub.dev</a></p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
